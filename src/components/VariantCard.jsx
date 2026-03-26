@@ -61,7 +61,8 @@ export default function VariantCard({ section }) {
       <img
         src={`/screenshots/${section.screenshot}`}
         alt={section.name}
-        className="w-full h-48 object-cover cursor-pointer"
+        className="w-full object-contain bg-white cursor-pointer"
+        style={{ aspectRatio: '16/9' }}
         onClick={() => window.open(`/screenshots/${section.screenshot}`, "_blank")}
         onError={(e) => {
           e.target.style.display = "none";
@@ -70,7 +71,7 @@ export default function VariantCard({ section }) {
       />
       {/* Fallback if no image */}
       <div
-        className="w-full h-48 bg-gray-800 items-center justify-center text-gray-600 text-sm hidden"
+        className="w-full bg-gray-800 items-center justify-center text-gray-600 text-sm hidden" style={{ aspectRatio: '16/9' }}
         style={{ display: "none" }}
       >
         No screenshot

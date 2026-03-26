@@ -138,11 +138,39 @@ export const HOMEPAGE_HEROES = [
     conversion: "Dual CTA (Book Consultation + See Results link)",
     assetsRequired: "Avatar stack count, 3 credentials/stats for bottom bar",
     tone: "Niche authority, mission-driven"
+  },
+  {
+    id: "video-hero-google-reviews",
+    nodeId: "2064:52",
+    name: "Video Hero - Google Reviews",
+    screenshot: "home-hero-video-google-reviews.png",
+    layout: "Centered single-column. Google review badge (5.0 / 200+ reviews) → headline → subtext → large video slot → single CTA.",
+    keyElements: ["Google review badge above headline", "Large centered video embed", "Single focused CTA"],
+    bestFor: ["Service businesses with strong review profiles", "Local businesses leveraging Google reviews", "B2B companies with demo/explainer video", "Trust-sensitive or competitive markets"],
+    chooseWhen: ["Client has verifiable social proof (Google reviews, G2, Trustpilot) AND a strong video asset", "Brief mentions trust, credibility, or overcoming skepticism", "Video is a testimonial or case study — review badge primes viewer", "Client has both strong reviews AND strong video"],
+    avoidWhen: ["No reviews or social proof to feature", "Minimal/design-forward brand", "Review badge would feel forced or inauthentic"],
+    conversion: "Single CTA (focused)",
+    assetsRequired: "Video, Google reviews (200+)",
+    tone: "Trust-forward, credibility-led"
+  },
+  {
+    id: "video-hero-no-social-proof",
+    nodeId: "2064:138",
+    name: "Video Hero - No Social Proof",
+    screenshot: "home-hero-video-no-social-proof.png",
+    layout: "Centered single-column. Headline → subtext → video slot → single CTA. No social proof, no badges. Maximum whitespace.",
+    keyElements: ["Bold headline", "Video embed", "Single CTA", "Nothing else — pure minimal"],
+    bestFor: ["Startups and product launches without review volume", "Creative agencies and design-led brands", "SaaS with strong product demo needing no preamble", "DTC/lifestyle brands launching with brand film", "Premium brands where trust badges detract from positioning"],
+    chooseWhen: ["Client doesn't have social proof yet or doesn't want to lead with it", "Brief prioritizes clean design, minimalism, or brand aesthetics", "Video is a product demo or brand film (not testimonial)", "Brief mentions minimal, modern, clean, simple, or elegant", "Campaign landing page with singular video focus"],
+    avoidWhen: ["Client has strong reviews they want visible", "Trust-sensitive market", "Conversion optimization is priority over aesthetics"],
+    conversion: "Single CTA (focused)",
+    assetsRequired: "Video (or recommend producing)",
+    tone: "Clean, confident, brand-forward"
   }
 ];
 
 export const SIDEBAR_SECTIONS = [
-  { id: "homepage-heroes", label: "Homepage Heroes", count: 10, status: "annotated" },
+  { id: "homepage-heroes", label: "Homepage Heroes", count: 12, status: "annotated" },
   { id: "interior-heroes", label: "Interior Heroes", count: 9, status: "pending" },
   { id: "service-sections", label: "Service Sections", count: null, status: "pending" },
   { id: "how-it-works", label: "How It Works", count: null, status: "pending" },
