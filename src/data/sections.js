@@ -7,8 +7,8 @@ export const HOMEPAGE_HEROES = [
     layout: "Centered single-column. Headline → subtext → stats bar (3 numbers) → large video slot → single CTA.",
     keyElements: ["3-stat credibility bar", "Video play button", "Single focused CTA"],
     bestFor: ["B2B agencies/consultancies with outcome metrics", "SaaS/fintech with traction numbers", "Clients with demo reel or explainer video"],
-    chooseWhen: ["Client has 3+ strong quantitative stats", "Video asset exists and is high quality", "Single conversion action is the goal", "Brief emphasizes proof over storytelling"],
-    avoidWhen: ["No video content available", "No meaningful stats to showcase", "Brief calls for lifestyle/emotional tone"],
+    chooseWhen: ["Client has 3+ strong quantitative stats", "Video asset exists and is high quality", "Video doesn't exist yet but SHOULD — if client has strong results or story worth showing, recommend producing one as part of project scope", "Single conversion action is the goal", "Brief emphasizes proof over storytelling"],
+    avoidWhen: ["Client has no stats AND video would be a stretch (purely text/image brand)", "Brief calls for lifestyle/emotional tone"],
     conversion: "Single CTA (focused)",
     assetsRequired: "Video, 3 statistics",
     tone: "Authoritative, results-driven"
