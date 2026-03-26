@@ -16,9 +16,37 @@ function getToneBadgeClass(tone) {
 
 const TABS = ["Overview", "Choose When", "Avoid When", "Assets"];
 
+const FEEDBACK_ENDPOINT = "https://openclaw-tools-6mff3.ondigitalocean.app/section-library/feedback";
+
 export default function VariantCard({ section }) {
   const [activeTab, setActiveTab] = useState("Overview");
   const [copied, setCopied] = useState(false);
+  const [feedbackText, setFeedbackText] = useState("");
+  const [sending, setSending] = useState(false);
+  const [sent, setSent] = useState(false);
+
+  async function handleFeedbackSubmit() {
+    if (!feedbackText.trim() || sending) return;
+    setSending(true);
+    try {
+      await fetch(FEEDBACK_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          sectionName: section.name,
+          nodeId: section.nodeId,
+          feedback: feedbackText.trim(),
+        }),
+      });
+      setSent(true);
+      setFeedbackText("");
+      setTimeout(() => setSent(false), 3000);
+    } catch (err) {
+      console.error("Feedback submit failed:", err);
+    } finally {
+      setSending(false);
+    }
+  }
 
   function copyNodeId() {
     navigator.clipboard.writeText(section.nodeId).then(() => {
@@ -162,6 +190,26 @@ export default function VariantCard({ section }) {
             <ExternalLink className="w-3.5 h-3.5" />
             Open in Figma
           </a>
+        </div>
+
+        {/* Feedback section */}
+        <div className="mt-4 pt-4 border-t border-gray-800">
+          <textarea
+            value={feedbackText}
+            onChange={(e) => setFeedbackText(e.target.value)}
+            placeholder="Send feedback on this section... (e.g. 'Use this for luxury real estate', 'Update the Figma link')"
+            className="w-full bg-gray-800 border border-gray-700 text-gray-300 text-sm rounded-lg px-3 py-2 placeholder-gray-600 resize-none focus:outline-none focus:border-gray-500"
+            rows={2}
+          />
+          <div className="flex justify-end mt-2">
+            <button
+              onClick={handleFeedbackSubmit}
+              disabled={!feedbackText.trim() || sending}
+              className="text-xs bg-blue-600 hover:bg-blue-500 disabled:bg-gray-700 disabled:text-gray-500 text-white px-3 py-1.5 rounded-lg transition-colors"
+            >
+              {sending ? 'Sending...' : sent ? '✓ Sent' : 'Send Feedback'}
+            </button>
+          </div>
         </div>
       </div>
     </div>
