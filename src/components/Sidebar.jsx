@@ -12,6 +12,7 @@ export default function Sidebar({ sections, activeId, onSelect }) {
         {sections.map((section) => {
           const isActive = section.id === activeId;
           const isAnnotated = section.status === "annotated";
+          const isAiAnnotated = section.status === "ai-annotated";
 
           return (
             <button
@@ -24,21 +25,25 @@ export default function Sidebar({ sections, activeId, onSelect }) {
               {/* Status dot */}
               <span
                 className={`w-2 h-2 rounded-full flex-shrink-0 ${
-                  isAnnotated ? "bg-green-500" : "bg-gray-600"
+                  isAnnotated
+                    ? "bg-green-500"
+                    : isAiAnnotated
+                    ? "bg-blue-400 opacity-75"
+                    : "bg-gray-600"
                 }`}
               />
 
               {/* Label */}
               <span
                 className={`flex-1 text-sm ${
-                  isActive || isAnnotated ? "text-white" : "text-gray-500"
+                  isActive || isAnnotated || isAiAnnotated ? "text-white" : "text-gray-500"
                 }`}
               >
                 {section.label}
               </span>
 
-              {/* Count or pending */}
-              {section.count !== null ? (
+              {/* Count badge */}
+              {section.count !== null && section.count !== undefined ? (
                 <span className="text-xs text-gray-400 bg-gray-700/60 rounded px-1.5 py-0.5">
                   {section.count}
                 </span>
@@ -49,6 +54,18 @@ export default function Sidebar({ sections, activeId, onSelect }) {
           );
         })}
       </nav>
+
+      {/* Footer legend */}
+      <div className="px-4 py-3 border-t border-gray-800 flex flex-col gap-1.5">
+        <div className="flex items-center gap-2 text-xs text-gray-500">
+          <span className="w-2 h-2 rounded-full bg-green-500 flex-shrink-0" />
+          Manually annotated
+        </div>
+        <div className="flex items-center gap-2 text-xs text-gray-500">
+          <span className="w-2 h-2 rounded-full bg-blue-400 opacity-75 flex-shrink-0" />
+          AI annotated
+        </div>
+      </div>
     </aside>
   );
 }

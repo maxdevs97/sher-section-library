@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { ExternalLink } from "lucide-react";
 
-const FIGMA_BASE = "https://www.figma.com/design/zR55u8MPPZ5tV51OhvNKhp?node-id=";
+const FIGMA_FILE_KEY = "zR55u8MPPZ5tV51OhvNKhp";
+const FIGMA_BASE = `https://www.figma.com/design/${FIGMA_FILE_KEY}?node-id=`;
 
 function getToneBadgeClass(tone) {
   const t = tone.toLowerCase();
