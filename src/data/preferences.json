@@ -1,5 +1,9 @@
 {
   "_note": "Preferred section variants per section type. Set preferred: true to favor a variant in wireframe generation.",
-  "_updated": "",
-  "sections": {}
+  "_updated": "2026-04-01",
+  "sections": {
+    "logo-reel": {
+      "preferred": true
+    }
+  }
 }
