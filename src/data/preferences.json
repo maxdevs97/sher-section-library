@@ -7,6 +7,9 @@
     },
     "services-marquee": {
       "preferred": true
+    },
+    "services-5": {
+      "preferred": true
     }
   }
 }
