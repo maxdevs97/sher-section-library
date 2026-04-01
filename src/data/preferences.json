@@ -13,6 +13,9 @@
     },
     "services-and-subservices": {
       "preferred": true
+    },
+    "credibility-stats-4": {
+      "preferred": true
     }
   }
 }
