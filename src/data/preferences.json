@@ -7,6 +7,9 @@
     },
     "services-5": {
       "preferred": true
+    },
+    "services-2": {
+      "preferred": true
     }
   }
 }
