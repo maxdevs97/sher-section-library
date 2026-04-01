@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect, useCallback } from "react";
 import { Search } from "lucide-react";
 import { HOMEPAGE_HEROES } from "./data/sections";
 import allSections from "./data/allSections.json";
@@ -7,6 +7,7 @@ import VariantCard from "./components/VariantCard";
 import EmptyState from "./components/EmptyState";
 
 const FIGMA_FILE_URL = "https://www.figma.com/design/zR55u8MPPZ5tV51OhvNKhp";
+const PREFERENCES_ENDPOINT = "https://openclaw-tools-6mff3.ondigitalocean.app/section-library/preferences";
 
 // Group allSections by pageName
 const sectionsByPage = allSections.reduce((acc, s) => {
@@ -70,6 +71,36 @@ function getHeaderTitle(id) {
 export default function App() {
   const [activeSection, setActiveSection] = useState("homepage-heroes");
   const [search, setSearch] = useState("");
+  // preferences: { sectionId: true } — set of preferred section ids
+  const [preferences, setPreferences] = useState({});
+
+  // Load preferences on mount
+  useEffect(() => {
+    fetch(PREFERENCES_ENDPOINT)
+      .then((r) => r.json())
+      .then((data) => {
+        if (data && data.sections) {
+          const prefs = {};
+          Object.entries(data.sections).forEach(([id, val]) => {
+            if (val?.preferred) prefs[id] = true;
+          });
+          setPreferences(prefs);
+        }
+      })
+      .catch((err) => console.error("Failed to load preferences:", err));
+  }, []);
+
+  const handleTogglePreference = useCallback((sectionId, preferred) => {
+    setPreferences((prev) => {
+      const next = { ...prev };
+      if (preferred) {
+        next[sectionId] = true;
+      } else {
+        delete next[sectionId];
+      }
+      return next;
+    });
+  }, []);
 
   const activeData = SECTION_DATA[activeSection] || [];
   const activeSectionMeta = SIDEBAR_SECTIONS.find((s) => s.id === activeSection);
@@ -154,7 +185,12 @@ export default function App() {
               </div>
             ) : (
               filtered.map((section) => (
-                <VariantCard key={section.id} section={section} />
+                <VariantCard
+                  key={section.id}
+                  section={section}
+                  preferred={!!preferences[section.id]}
+                  onTogglePreference={handleTogglePreference}
+                />
               ))
             )}
           </div>

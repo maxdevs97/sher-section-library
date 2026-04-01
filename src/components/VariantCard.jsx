@@ -18,8 +18,9 @@ function getToneBadgeClass(tone) {
 const TABS = ["Overview", "Choose When", "Avoid When", "Assets"];
 
 const FEEDBACK_ENDPOINT = "https://openclaw-tools-6mff3.ondigitalocean.app/section-library/feedback";
+const PREFERENCES_ENDPOINT = "https://openclaw-tools-6mff3.ondigitalocean.app/section-library/preferences";
 
-export default function VariantCard({ section }) {
+export default function VariantCard({ section, preferred = false, onTogglePreference }) {
   const [activeTab, setActiveTab] = useState("Overview");
   const [copied, setCopied] = useState(false);
   const [feedbackText, setFeedbackText] = useState("");
@@ -56,8 +57,47 @@ export default function VariantCard({ section }) {
     });
   }
 
+  async function handleStarClick(e) {
+    e.stopPropagation();
+    const newPreferred = !preferred;
+    // Optimistic update
+    if (onTogglePreference) onTogglePreference(section.id, newPreferred);
+    // Persist to server
+    try {
+      await fetch(PREFERENCES_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ sectionId: section.id, preferred: newPreferred }),
+      });
+    } catch (err) {
+      console.error("Preference update failed:", err);
+      // Revert on error
+      if (onTogglePreference) onTogglePreference(section.id, preferred);
+    }
+  }
+
   return (
-    <div className="bg-gray-900 rounded-xl border border-gray-800 overflow-hidden flex flex-col">
+    <div className={`bg-gray-900 rounded-xl border overflow-hidden flex flex-col relative ${preferred ? "border-yellow-500/60" : "border-gray-800"}`}>
+      {/* Star button — top-right corner */}
+      <button
+        onClick={handleStarClick}
+        title={preferred ? "Remove from preferred" : "Mark as preferred"}
+        className="absolute top-2 right-2 z-10 w-8 h-8 flex items-center justify-center rounded-full bg-gray-900/80 hover:bg-gray-800 transition-colors shadow"
+      >
+        <span className="text-lg leading-none" style={{ lineHeight: 1 }}>
+          {preferred ? "⭐" : "☆"}
+        </span>
+      </button>
+
+      {/* Preferred badge */}
+      {preferred && (
+        <div className="absolute top-2 left-2 z-10">
+          <span className="bg-yellow-500/20 text-yellow-400 text-xs font-semibold px-2 py-0.5 rounded-full border border-yellow-500/30">
+            Preferred
+          </span>
+        </div>
+      )}
+
       {/* Screenshot */}
       <img
         src={`/screenshots/${section.screenshot}`}
