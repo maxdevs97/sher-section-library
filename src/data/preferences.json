@@ -31,6 +31,9 @@
     },
     "content-4": {
       "preferred": true
+    },
+    "content-3": {
+      "preferred": true
     }
   }
 }
