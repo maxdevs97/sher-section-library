@@ -40,6 +40,9 @@
     },
     "value-prop-slider": {
       "preferred": true
+    },
+    "cta-banner-1": {
+      "preferred": true
     }
   }
 }
