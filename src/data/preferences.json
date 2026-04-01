@@ -4,6 +4,9 @@
   "sections": {
     "logo-reel": {
       "preferred": true
+    },
+    "services-5": {
+      "preferred": true
     }
   }
 }
