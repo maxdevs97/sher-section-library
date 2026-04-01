@@ -37,6 +37,9 @@
     },
     "content-1": {
       "preferred": true
+    },
+    "value-prop-slider": {
+      "preferred": true
     }
   }
 }
