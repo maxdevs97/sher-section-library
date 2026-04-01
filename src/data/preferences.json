@@ -19,6 +19,9 @@
     },
     "process-1": {
       "preferred": true
+    },
+    "process-5": {
+      "preferred": true
     }
   }
 }
