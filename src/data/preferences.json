@@ -1,6 +1,6 @@
 {
   "_note": "Preferred section variants per section type. Set preferred: true to favor a variant in wireframe generation.",
-  "_updated": "2026-04-01",
+  "_updated": "2026-04-17",
   "sections": {
     "logo-reel": {
       "preferred": true
@@ -42,6 +42,9 @@
       "preferred": true
     },
     "cta-banner-1": {
+      "preferred": true
+    },
+    "interior-hero-2": {
       "preferred": true
     }
   }
